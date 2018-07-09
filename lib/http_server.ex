@@ -1,14 +1,16 @@
 defmodule HttpServer do
-  use Plug.Router
+  use Application
+  require Logger
 
-  plug(:match)
-  plug(:dispatch)
+  def start(_type, _args) do
+    port = Application.get_env(:http_server, :cowboy_port, 8000)
 
-  get "/hello" do
-    send_resp(conn, 200, "world")
-  end
+    children = [
+      Plug.Adapters.Cowboy.child_spec(:http, HttpServer.Router, [], port: port)
+    ]
 
-  match _ do
-    send_resp(conn, 404, "oops")
+    Logger.info("App Started!")
+
+    Supervisor.start_link(children, strategy: :one_for_one)
   end
 end

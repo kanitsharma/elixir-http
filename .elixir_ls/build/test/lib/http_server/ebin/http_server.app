@@ -1,7 +1,9 @@
 {application,http_server,
              [{applications,[kernel,stdlib,elixir,logger,plug,cowboy]},
               {description,"http_server"},
-              {modules,['Elixir.HttpServer']},
+              {modules,['Elixir.HttpServer','Elixir.HttpServer.Router']},
               {registered,[]},
               {vsn,"0.1.0"},
-              {extra_applications,[logger,plug,cowboy]}]}.
+              {extra_applications,[logger,plug,cowboy]},
+              {mod,{'Elixir.HttpServer',[]}},
+              {env,[{cowboy_port,8000}]}]}.

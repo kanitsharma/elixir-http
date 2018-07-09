@@ -14,7 +14,9 @@ defmodule HttpServer.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :plug, :cowboy]
+      extra_applications: [:logger, :plug, :cowboy],
+      mod: {HttpServer, []},
+      env: [cowboy_port: 8000]
     ]
   end
 
