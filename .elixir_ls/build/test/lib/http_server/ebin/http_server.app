@@ -1,5 +1,5 @@
 {application,http_server,
-             [{applications,[kernel,stdlib,elixir,logger]},
+             [{applications,[kernel,stdlib,elixir,logger,cowboy,plug]},
               {description,"http_server"},
               {modules,['Elixir.HttpServer']},
               {registered,[]},
