@@ -1,13 +1,14 @@
 defmodule HttpServer do
-  def init(default_options) do
-    IO.puts("initializing plug")
-    default_options
+  use Plug.Router
+
+  plug(:match)
+  plug(:dispatch)
+
+  get "/hello" do
+    send_resp(conn, 200, "world")
   end
 
-  def call(conn, options) do
-    IO.puts("calling plug")
-
-    conn
-    |> Plug.Conn.send_resp(200, "hello world")
+  match _ do
+    send_resp(conn, 404, "oops")
   end
 end
